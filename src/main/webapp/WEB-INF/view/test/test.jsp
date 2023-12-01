@@ -15,7 +15,7 @@
 		<div>
 			JSTL 확인 : 
 			<c:if test="${1<2 }">
-				<a href="${pageContext.request.contextPath}/test2">test2로 이동</a>
+				<a href="${pageContext.request.contextPath}/test2">test2로 이동.</a>
 			</c:if>					
 		</div>
 		
