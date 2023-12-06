@@ -25,7 +25,7 @@ public class TestController {
 		model.addAttribute("empName", empName);
 		
 		
-		log.debug(TeamColor.RED + "test");
+		log.debug(TeamColor.RED + "test123");
 		return "test/test";
 		
 	}	
