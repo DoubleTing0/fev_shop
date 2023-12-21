@@ -22,14 +22,16 @@ public class GoodsImgController {
 	
 	@Autowired private GoodsImgService goodsImgService;
 	
-	@GetMapping("/goods/addGoodsImg")
+	// [관리자] 상품 이미지 추가 Get
+	@GetMapping("/emp/goods/addGoodsImg")
 	public String addGoodsImg() {
 	
-		return "admin/goods/addGoodsImg";
+		return "emp/goods/addGoodsImg";
 		
 	}
 	
-	@PostMapping("/goods/addGoodsImg") 
+	// [관리자] 상품 이미지 추가 Post
+	@PostMapping("/emp/goods/addGoodsImg") 
 	public String addGoodsImg(HttpSession session, HttpServletRequest request
 								, @RequestParam(value="goodsImg") MultipartFile mfImg) {
 		
@@ -50,7 +52,7 @@ public class GoodsImgController {
 			log.debug(TeamColor.BLUE + "상품 이미지 등록 실패");
 		}
 		
-		return "redirect:/goods/addGoodsImg";
+		return "redirect:/emp/goods/addGoodsImg";
 		
 	}
 

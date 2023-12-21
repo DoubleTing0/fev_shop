@@ -12,7 +12,7 @@
 		
 		<h1>addGoodsImg</h1>
 		
-		<form method = "post" enctype = "multipart/form-data" action = "${pageContext.request.contextPath }/goods/addGoodsImg">
+		<form method = "post" enctype = "multipart/form-data" action = "${pageContext.request.contextPath }/emp/goods/addGoodsImg">
 		
 			<div>
 				사진1 : <input type = "file" name = "goodsImg">
