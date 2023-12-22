@@ -9,19 +9,50 @@
 	</head>
 	
 	<body>
-		
-		<c:forEach var = "goodsType" items = "${goodsTypeList }">
-			<div>${goodsType.goodsTypeNo }</div>	
-			<div>${goodsType.goodsTypeContent }</div>	
-			<div>${goodsType.createdate }</div>
-		</c:forEach>
+		<div>
+			<h1>상위 카테고리 관리</h1>
+		</div>
 		
 		<div>
-			<select>
+			<table border = "1">
+				<tr>
+					<td>상위 카테고리</td>
+					<td>수정</td>
+					<td>삭제</td>
+				</tr>
+				
 				<c:forEach var = "goodsType" items = "${goodsTypeList }">
-					<option value = "${goodsType.goodsTypeNo }">${goodsType.goodsTypeContent }</option>
+					<tr>
+						<td>
+							<a href = "${pageContext.request.contextPath }/emp/goodsType/goodsType2List?goodsTypeNo=${goodsType.goodsTypeNo }">
+								${goodsType.goodsTypeContent }
+							</a>
+						</td>
+						<td>
+							<button type="button" onClick="location.href='${pageContext.request.contextPath }/emp/goodsType/modifyGoodsType?goodsTypeNo=${goodsType.goodsTypeNo }'">수정</button>
+						</td>
+						<td>
+							<form method = "post" action = "${pageContext.request.contextPath }/emp/goodsType/deleteGoodsType">
+								<input type = "hidden" name = "goodsTypeNo" value = "${goodsType.goodsTypeNo }">
+								<button type = "submit">삭제</button>
+							</form>
+						</td>
+					</tr>
 				</c:forEach>
-			</select>
+			</table>
+			
+			<div>
+				<br>
+				<button type="button" onClick="location.href='${pageContext.request.contextPath }/emp/goodsType/addGoodsType'">등록</button>
+			</div>
+			
+			<div>
+				<br>
+				<button type="button" onClick="location.href='${pageContext.request.contextPath }/emp/main'">이전</button>
+				
+			</div>
+			
+			
 		</div>
 		
 	</body>

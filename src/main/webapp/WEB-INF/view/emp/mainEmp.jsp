@@ -21,5 +21,10 @@
 			<a href = "${pageContext.request.contextPath }/emp/goods/addGoods">상품 등록</a>
 		</div>
 		
+		<div>
+			<br>
+			<a href = "${pageContext.request.contextPath }/emp/goodsType/goodsTypeList">카테고리 관리</a>
+		</div>
+		
 	</body>
 </html>

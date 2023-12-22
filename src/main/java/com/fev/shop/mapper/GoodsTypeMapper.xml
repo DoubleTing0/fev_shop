@@ -2,8 +2,59 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fev.shop.mapper.GoodsTypeMapper">
 
+	<!-- [관리자] 상품 상위 카테고리 삭제 -->
+	<delete id = "deleteGoodsType"
+			parameterType = "com.fev.shop.vo.GoodsType">
+	
+		DELETE
+		FROM goods_type
+		WHERE goods_type_no = #{goodsTypeNo}
+			
+	</delete>
+			
+	
+	
+	<!-- [관리자] 상품 상위 카테고리 One -->
+	<select id = "getGoodsTypeOne"
+			parameterType = "com.fev.shop.vo.GoodsType"
+			resultType = "com.fev.shop.vo.GoodsType">
+			
+	
+		SELECT
+			goods_type_no goodsTypeNO
+			, goods_type_content goodsTypeContent
+			, createdate
+		FROM goods_type
+		WHERE goods_type_no = #{goodsTypeNo}
+			
+	</select>
+	
+	<!-- [관리자] 상품 상위 카테고리 수정 -->
+	<update id = "modifyGoodsType"
+			parameterType = "com.fev.shop.vo.GoodsType">
+		
+		UPDATE goods_type
+		SET goods_type_content = #{goodsTypeContent}
+		WHERE goods_type_no = #{goodsTypeNo}
+			
+	</update>
+	
+	<!-- [관리자] 상품 상위 카테고리 등록 -->
+	<insert id = "addGoodsType"
+			parameterType = "com.fev.shop.vo.GoodsType">
+		
+		INSERT INTO goods_type (
+			goods_type_content
+		) VALUE (
+			#{goodsTypeContent}
+		)
+	
+	</insert>
+	
+	
+
 	<!-- [관리자] 상품 상위 카테고리 List -->
-	<select id = "selectGoodsTypeList"
+	<select id = "getGoodsTypeList"
 			resultType = "com.fev.shop.vo.GoodsType">
 		
 		SELECT
@@ -11,6 +62,7 @@
 			, goods_type_content goodsTypeContent
 			, createdate
 		FROM goods_type
+		ORDER BY goods_type_no ASC
 			
 	</select>
 

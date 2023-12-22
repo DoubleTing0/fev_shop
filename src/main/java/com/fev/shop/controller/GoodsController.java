@@ -35,8 +35,8 @@ public class GoodsController {
 	@GetMapping("emp/goods/addGoods")
 	public String addGoods(Model model) {
 		
-		List<GoodsType> goodsTypeList = goodsTypeService.selectGoodsTypeList();
-		List<GoodsType2> goodsType2List = goodsType2Service.selectGoodsType2List();
+		List<GoodsType> goodsTypeList = goodsTypeService.getGoodsTypeList();
+		List<GoodsType2> goodsType2List = goodsType2Service.getGoodsType2List();
 		
 		model.addAttribute("goodsTypeList", goodsTypeList);
 		model.addAttribute("goodsType2List", goodsType2List);

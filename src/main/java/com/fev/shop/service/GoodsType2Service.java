@@ -18,10 +18,41 @@ public class GoodsType2Service {
 
 	@Autowired private GoodsType2Mapper goodsType2Mapper;
 	
-	// [관리자] 상품 하위 카테고리 List
-	public List<GoodsType2> selectGoodsType2List() {
+	
+	
+	// [관리자] 상품 하위 카테고리 삭제
+	public int deleteGoodsType2(GoodsType2 goodsType2) {
 		
-		return goodsType2Mapper.selectGoodsType2List();
+		return goodsType2Mapper.deleteGoodsType2(goodsType2);
+		
+	}
+	
+	// [관리자] 상품 하위 카테고리 수정
+	public int modifyGoodsType2(GoodsType2 goodsType2) {
+		
+		return goodsType2Mapper.modifyGoodsType2(goodsType2);
+		
+	}
+	
+	
+	// [관리자] 상품 하위 카테고리 추가
+	public int addGoodsType2(GoodsType2 goodsType2) {
+		
+		return goodsType2Mapper.addGoodsType2(goodsType2);
+		
+	}
+	
+	// [관리자] 상품 하위 카테고리 One
+	public GoodsType2 getGoodsType2One(GoodsType2 goodsType2) {
+		
+		return goodsType2Mapper.getGoodsType2One(goodsType2);
+		
+	}
+	
+	// [관리자] 상품 하위 카테고리 List
+	public List<GoodsType2> getGoodsType2List() {
+		
+		return goodsType2Mapper.getGoodsType2List();
 		
 	}
 	
