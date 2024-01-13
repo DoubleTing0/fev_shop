@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fev.shop.mapper.GoodsMapper">
+	
+	<!-- [관리자] 상품 추가 -->
+	<insert id = "addGoods"
+			parameterType = "com.fev.shop.vo.Goods">
+		
+		<selectKey resultType = "int"
+					keyProperty = "goodsNo"
+					keyColumn = "goods_no"
+					order = "AFTER">
+		
+			<!-- 마지막 auto_increment 값 반환하는 함수 -->
+			SELECT LAST_INSERT_ID()
+					
+		</selectKey>
+		
+		INSERT INTO goods (
+			goods_type_no
+			, goods_type2_no
+			, goods_name
+			, goods_price
+			, goods_active
+		) VALUE (
+			#{goodsTypeNo}
+			, #{goodsType2No}
+			, #{goodsName}
+			, #{goodsPrice}
+			, #{goodsActive}
+		)			
+			
+	</insert>
+
+
+</mapper>

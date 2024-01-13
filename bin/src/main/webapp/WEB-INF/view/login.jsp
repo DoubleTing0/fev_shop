@@ -113,7 +113,7 @@
 			</div>
 		</c:if>
 		
-		<a href="${pageContext.request.contextPath }/joinCustomer">회원가입</a>
+		
 		
 		
 		

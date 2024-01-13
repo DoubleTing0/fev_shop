@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fev.shop.mapper.JoinMapper">
+
+	<insert id="joinCustomer"
+		parameterType="com.fev.shop.vo.Customer">
+	
+		INSERT INTO customer (customer_id
+								, customer_pw
+								, customer_name
+								, customer_phone
+								, point
+								, createdate) 
+					VALUES(#{customer_id}
+								, PASSWORD(#{customer_pw})
+								, #{customer_name}
+								, #{customer_phone}
+								, 0
+								, NOW());
+		
+	</insert>
+
+
+</mapper>

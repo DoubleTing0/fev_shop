@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fev.shop.mapper.LoginMapper">
+
+	<select id = "loginEmp"
+			parameterType = "com.fev.shop.vo.Emp"
+			resultType = "com.fev.shop.vo.Emp">
+	
+		SELECT
+			emp_id empId
+			, emp_name empName
+		FROM emp
+		WHERE emp_id = #{empId}
+			AND emp_pw = PASSWORD(#{empPw})		
+			
+	</select>
+
+
+</mapper>
