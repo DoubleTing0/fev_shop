@@ -31,6 +31,29 @@
 		)			
 			
 	</insert>
+	
+	<!-- [관리자] 상품 List (검색, 페이징 가능) -->
+	<select id = "selectGoodsList"
+			parameterType = "java.util.Map">
+		
+		SELECT
+			goods_no goodsNo
+			, goods_type_no goodsTypeNo
+			, goods_type2_no goodsType2No
+			, goods_name goodsName
+			, goods_price goodsPrice
+			, goods_active goodsActive
+			, createdate
+		FROM goods
+		<where>
+			<if test = "searchWord != null || searchWord != ''">
+				#{searchType} like CONCAT('%', #{searchWord}, '%')
+			</if>
+		</where>
+		ORDER BY emp_no DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	
+	</select>
 
 
 </mapper>

@@ -3,6 +3,8 @@ package com.fev.shop.service;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,9 +150,20 @@ public class GoodsService {
 			
 		}
 		
-		
 		return resultRow;
 		
 	}
-
+	
+	
+	
+	// [관리자] 상품 List (검색, 페이징 가능)
+	public List<Goods> getGoodsList(Map<String, Object> paramMap) {
+		
+		List<Goods> goodsList = goodsMapper.selectGoodsList(paramMap);
+		
+		return goodsList;
+		
+	}
+	
+	
 }

@@ -15,9 +15,26 @@
 		
 			$(document).ready(function() {
 			
-				let type = $('#typeSelect')
-				let type2 = $('#type2Select')
-				let type2Option = $('#type2Select option')
+				let type = $('#typeSelect');
+				let type2 = $('#type2Select');
+				let typeOption = $('#typeSelect option');
+				let type2Option = $('#type2Select option');
+				
+				let typePageTag = ' <button type = \"button\"  onClick = \"location.href = \'${pageContext.request.contextPath}/emp/goodsType/goodsTypeList\'\">카테고리 관리</buuton>'; 
+				
+				// DB에 상위 카테고리 데이터가 없다면 카테고리 관리 버튼 생성
+				if(typeOption.length == 0) {
+					
+					type.after(typePageTag);
+					
+				}
+				
+				// DB에 하위 카테고리 데이터가 없다면 카테고리 관리 버튼 생성
+				if(type2Option.length == 0) {
+					
+					type2.after(typePageTag);
+					
+				}
 				
 				for(let i=0; i<type2Option.length; i++) {
 					
@@ -61,14 +78,15 @@
 					
 				});
 				
-				//$('#type2Select option').hide();
+				/*
+				$('#type2Select option').hide();
 				console.log($('#type2Select option:eq(2)'));
 				console.log($('#type2Select option').eq(2));
-				//$('#type2Select option:eq(2)').hide();
+				$('#type2Select option:eq(2)').hide();
 				console.log($('#typeSelect option').length)
 				console.log($('#type2Select option')[2].id)
-				//console.log($('#type2Select option').index($('#type2Select option:selected')))
-				
+				console.log($('#type2Select option').index($('#type2Select option:selected')))
+				*/
 			});
 			
 			
@@ -176,6 +194,11 @@
 			
 			
 			</form>
+		</div>
+		
+		<div>
+			<select id = "test">
+			</select>
 		</div>
 		
 		
