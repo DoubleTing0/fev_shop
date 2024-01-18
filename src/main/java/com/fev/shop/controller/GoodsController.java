@@ -1,7 +1,9 @@
 package com.fev.shop.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -68,6 +70,75 @@ public class GoodsController {
 		return "redirect:/emp/main";
 		
 	}
+	
+	
+	// [관리자] 상품 List (검색, 페이징)
+	@GetMapping("emp/goods/goodsList")
+	public String getGoodsList(Model model
+								, @RequestParam(defaultValue = "1") int currentPage
+								, @RequestParam(defaultValue = "") String searchType
+								, @RequestParam(defaultValue = "") String searchWord) {
+		
+		// goodsList
+		Map<String, Object> goodsMap = new HashMap<>();
+		
+		goodsMap.put("currentPage", currentPage);
+		goodsMap.put("rowPerPage", 10);	// 한번에 표시할 상품 개수
+		goodsMap.put("searchType", searchType);
+		goodsMap.put("searchWord", searchWord);
+		
+		List<Map<String, Object>> goodsList = (ArrayList<Map<String, Object>>) goodsService.getGoodsList(goodsMap);
+		
+		log.debug(TeamColor.BLUE + goodsList.size() + " <-- goodsList.size()");
+		log.debug(TeamColor.BLUE + searchType + " <-- searchType");
+		log.debug(TeamColor.BLUE + searchWord + " <-- searchWord");
+		
+		// pageList
+		Map<String, Object> pageMap = goodsService.getGoodsPageList(goodsMap);
+		
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("searchWord", searchWord);
+		model.addAttribute("previousPage", pageMap.get("previousPage"));
+		model.addAttribute("nextPage", pageMap.get("nextPage"));
+		model.addAttribute("lastPage", pageMap.get("lastPage"));
+		model.addAttribute("pageList", pageMap.get("pageList"));
+		
+		model.addAttribute("goodsList", goodsList);
+		
+		return "emp/goods/goodsList";
+	}
+	
+	
+	// [관리자] 상품 One (상품 관리에서 자세히 클릭했을 때)
+	@GetMapping("emp/goods/goodsOne")
+	public String getGoodsList() {
+		
+		return "emp/goods/goodsOne";
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

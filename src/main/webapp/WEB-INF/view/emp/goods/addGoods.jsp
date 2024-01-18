@@ -20,7 +20,7 @@
 				let typeOption = $('#typeSelect option');
 				let type2Option = $('#type2Select option');
 				
-				let typePageTag = ' <button type = \"button\"  onClick = \"location.href = \'${pageContext.request.contextPath}/emp/goodsType/goodsTypeList\'\">카테고리 관리</buuton>'; 
+				let typePageTag = ' <button type = \"button\" onClick = \"location.href = \'${pageContext.request.contextPath}/emp/goodsType/goodsTypeList\'\">카테고리 관리</buuton>'; 
 				
 				// DB에 상위 카테고리 데이터가 없다면 카테고리 관리 버튼 생성
 				if(typeOption.length == 0) {
@@ -194,11 +194,6 @@
 			
 			
 			</form>
-		</div>
-		
-		<div>
-			<select id = "test">
-			</select>
 		</div>
 		
 		

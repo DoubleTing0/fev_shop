@@ -3,6 +3,7 @@ package com.fev.shop.service;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fev.shop.mapper.GoodsImgMapper;
 import com.fev.shop.mapper.GoodsMapper;
 import com.fev.shop.mapper.GoodsOptionMapper;
+import com.fev.shop.util.Page;
 import com.fev.shop.util.TeamColor;
 import com.fev.shop.vo.Goods;
 import com.fev.shop.vo.GoodsImg;
@@ -126,7 +128,7 @@ public class GoodsService {
 					// 이미지 파일 정보 DB에 저장
 					GoodsImg goodsImg = new GoodsImg();
 					goodsImg.setGoodsNo(goods.getGoodsNo());	// 상품 No
-					goodsImg.setSaveName(newName);	// 업로드 폴더에 저장된 이름
+					goodsImg.setSaveName(newName + "." + ext);	// 업로드 폴더에 저장된 이름
 					goodsImg.setOriginName(originName);	// 확장자 포함 원본 이름
 					goodsImg.setType(mfImg.getContentType());	// 이미지 타입
 					goodsImg.setSize(mfImg.getSize());	// 파일 용량
@@ -156,14 +158,80 @@ public class GoodsService {
 	
 	
 	
-	// [관리자] 상품 List (검색, 페이징 가능)
-	public List<Goods> getGoodsList(Map<String, Object> paramMap) {
+	// [관리자] 상품 List (검색, 페이징)
+	public List<Map<String, Object>> getGoodsList(Map<String, Object> paramMap) {
 		
-		List<Goods> goodsList = goodsMapper.selectGoodsList(paramMap);
+		// 페이징 처리
+		int beginRow = Page.getBeginRow((int) paramMap.get("currentPage"), (int) paramMap.get("rowPerPage"));
 		
-		return goodsList;
+		paramMap.put("beginRow", beginRow);
+		
+		log.debug(TeamColor.BLUE + paramMap.toString() + " <-- paramMap.toString()");
+		log.debug(TeamColor.BLUE + goodsMapper.getGoodsList(paramMap).toString() + " <-- goodsList.toString()");
+		
+		return goodsMapper.getGoodsList(paramMap); 
 		
 	}
+	
+	// [관리자] 상품 페이징
+	public Map<String, Object> getGoodsPageList(Map<String, Object> paramMap) {
+		
+		int currentPage = (int) paramMap.get("currentPage");
+		int rowPerPage = (int) paramMap.get("rowPerPage");
+		
+		// 처음 이전 1 2 3 4 5 6 7 8 9 10 다음 마지막
+		int pageLength = 10;
+		int count = goodsMapper.countGoods(paramMap);
+
+		int previousPage = Page.getPreviousPage(currentPage, pageLength);
+		int nextPage = Page.getNextPage(currentPage, pageLength);
+		int lastPage = Page.getLastPage(count, rowPerPage);
+		List<Integer> pageList = Page.getPageList(currentPage, pageLength);
+		
+		Map<String, Object> pageMap = new HashMap<>();
+		
+		pageMap.put("previousPage", previousPage);
+		pageMap.put("nextPage", nextPage);
+		pageMap.put("lastPage", lastPage);
+		pageMap.put("pageList", pageList);
+		
+		return pageMap;
+		
+	}
+	
+	
+	// [관리자] 상품 One
+	public Map<String, Object> getGoodsOne(int goodsNo) {
+		
+		return goodsMapper.getGoodsOne(goodsNo);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

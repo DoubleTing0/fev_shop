@@ -88,7 +88,7 @@ public class GoodsImgService {
 					// 이미지 파일 정보 DB에 저장
 					GoodsImg goodsImg = new GoodsImg();
 					goodsImg.setGoodsNo(77);	// 상품 No
-					goodsImg.setSaveName(newName);	// 업로드 폴더에 저장된 이름
+					goodsImg.setSaveName(newName + "." + ext);	// 업로드 폴더에 저장된 이름
 					goodsImg.setOriginName(originName);	// 확장자 포함 원본 이름
 					goodsImg.setType(mfImg.getContentType());	// 이미지 타입
 					goodsImg.setSize(mfImg.getSize());	// 파일 용량

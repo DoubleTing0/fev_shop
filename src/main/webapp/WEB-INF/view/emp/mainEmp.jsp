@@ -18,7 +18,8 @@
 		</div>
 		
 		<div>
-			<a href = "${pageContext.request.contextPath }/emp/goods/addGoods">상품 등록</a>
+			<br>
+			<a href = "${pageContext.request.contextPath }/emp/goods/goodsList">상품 관리</a>
 		</div>
 		
 		<div>

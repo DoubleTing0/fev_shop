@@ -32,27 +32,78 @@
 			
 	</insert>
 	
-	<!-- [관리자] 상품 List (검색, 페이징 가능) -->
-	<select id = "selectGoodsList"
-			parameterType = "java.util.Map">
+	<!-- [관리자] 상품 List (검색, 페이징) -->
+	<select id = "getGoodsList"
+			parameterType = "java.util.Map"
+			resultType = "java.util.Map">
 		
 		SELECT
-			goods_no goodsNo
-			, goods_type_no goodsTypeNo
-			, goods_type2_no goodsType2No
-			, goods_name goodsName
-			, goods_price goodsPrice
-			, goods_active goodsActive
-			, createdate
-		FROM goods
+			g.goods_no goodsNo
+			, g.goods_name goodsName
+			, gt.goods_type_content goodsTypeContent
+			, gt2.goods_type2_content goodsType2Content
+			, g.goods_price goodsPrice
+			, g.goods_active goodsActive
+			, g.createdate
+		FROM goods g
+			INNER JOIN goods_type gt
+			ON g.goods_type_no = gt.goods_type_no
+			INNER JOIN goods_type2 gt2
+			ON g.goods_type2_no = gt2.goods_type2_no
 		<where>
-			<if test = "searchWord != null || searchWord != ''">
-				#{searchType} like CONCAT('%', #{searchWord}, '%')
+			<if test = "searchWord != null and searchType != null and !searchWord.equals('') and !searchType.equals('')">
+				${searchType} like CONCAT('%', #{searchWord}, '%')
 			</if>
 		</where>
-		ORDER BY emp_no DESC
+		ORDER BY goods_no DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	
+	</select>
+	
+	
+	
+	
+	<!-- [관리자] 상품 count (검색, 페이징) -->
+	<select id = "countGoods"
+			parameterType = "java.util.Map">
+			
+		SELECT
+			COUNT(g.goods_no)
+		FROM goods g
+			INNER JOIN goods_type gt
+			ON g.goods_type_no = gt.goods_type_no
+			INNER JOIN goods_type2 gt2
+			ON g.goods_type2_no = gt2.goods_type2_no
+		<where>
+			<if test = "searchWord != null and searchType != null and !searchWord.equals('') and !searchType.equals('')">
+				${searchType} like CONCAT('%', #{searchWord}, '%')
+			</if>
+		</where>
+			
+	</select>
+	
+	
+	<!-- [관리자] 상품 One -->
+	<select id = "getGoodsOne"
+			parameterType = "int"
+			resultType = "java.util.Map">
+	
+		SELECT
+			g.goods_no goodsNo
+			, g.goods_name goodsName
+			, gt.goods_type_content goodsTypeContent
+			, gt2.goods_type2_content goodsType2Content
+			, g.goods_price goodsPrice
+			, g.goods_active goodsActive
+			, g.createdate
+		FROM goods g
+			INNER JOIN goods_type gt
+			ON g.goods_type_no = gt.goods_type_no
+			INNER JOIN goods_type2 gt2
+			ON g.goods_type2_no = gt2.goods_type2_no
+		WHERE g.goods_no = #{goodsNo}
+					
+			
 	</select>
 
 
