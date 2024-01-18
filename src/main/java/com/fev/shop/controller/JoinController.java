@@ -20,8 +20,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class JoinController {
 
-	@Autowired private JoinService joinService;
-	
+	@Autowired
+	private JoinService joinService;
+
 	// 회원가입
 	@GetMapping("/joinCustomer")
 	public String join() {
@@ -30,66 +31,27 @@ public class JoinController {
 
 	// 회원가입 등록
 	@PostMapping("/joinForm")
-	public String loginEmp(HttpSession session, Customer paramCustomer
-							,@RequestParam(value="joinId") String joinId
-							,@RequestParam(value="joinPw") String joinPw
-							,@RequestParam(value="joinName") String joinName
-							,@RequestParam(value="joinPhone") String joinPhone
-							) {
-		
-		String targetUrl = "redirect:/joinCustomer";	// 로그인 실패시 페이지
-		
-		//Emp emp = loginService.loginEmp(paramEmp);
+	public String loginEmp(HttpSession session, Customer paramCustomer, @RequestParam(value = "joinId") String joinId,
+			@RequestParam(value = "joinPw") String joinPw
+//							,@RequestParam(value="joinPw2") String joinPw2
+			, @RequestParam(value = "joinName") String joinName, @RequestParam(value = "joinPhone") String joinPhone) {
+
+		log.debug(TeamColor.GREEN + "joinController /joinForm");
+
+		String targetUrl = "redirect:/joinCustomer"; // 로그인 실패시 페이지
+
 		paramCustomer.setCustomer_id(joinId);
 		paramCustomer.setCustomer_pw(joinPw);
 		paramCustomer.setCustomer_name(joinName);
 		paramCustomer.setCustomer_phone(joinPhone);
-		
+		log.debug(TeamColor.GREEN + paramCustomer);
 		int customer = joinService.joinCustomer(paramCustomer);
-		
-		
-		/*
-		 * if(emp != null) {
-		 * 
-		 * session.setAttribute("loginEmp", emp);
-		 * 
-		 * targetUrl = "redirect:/emp/main"; // 로그인 성공시 페이지 }
-		 */
-		
-		if(customer != 0) {
+
+		if (customer != 0) {
 			targetUrl = "redirect:/login";
 		}
-		
+
 		return targetUrl;
-		
 	}
-		
-		
-		
-		
-		
-		
-		
-		/*		
- 		public HashMap<String, Object> joinSave(@RequestParam HashMap<String, String> params) {
-			log.debug(TeamColor.GREEN + params);
-			String joinId = params.get(joinId);
-			String joinPw = params.get(joinPw);
-			String joinName = params.get(joinName);
-			String joinBirth = params.get(joinBirth);
-			String joinPhone = params.get(joinPhone);
-			String joinAddress = params.get(joinAddress);
-			
-			
-			return "join";
-		}
-		*/
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
